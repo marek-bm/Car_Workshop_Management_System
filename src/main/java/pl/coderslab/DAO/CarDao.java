@@ -32,7 +32,7 @@ public class CarDao {
             pstm.setInt(2, car.getCarYear());
             pstm.setString(3, car.getCarRegisterNumb());
             pstm.setInt(4, car.getCarOwnerId());
-            pstm.setDate(5, car.getCar_nextInsp());
+            pstm.setString(5, car.getCar_nextInsp());
             pstm.setInt(6,car.getCarId());
             pstm.executeUpdate();
 
@@ -48,7 +48,7 @@ public class CarDao {
             pstm.setInt(2, car.getCarYear());
             pstm.setString(3, car.getCarRegisterNumb());
             pstm.setInt(4, car.getCarOwnerId());
-            pstm.setDate(5, car.getCar_nextInsp());
+            pstm.setString(5, car.getCar_nextInsp());
             pstm.executeUpdate();
 
             ResultSet rs = pstm.getGeneratedKeys();
@@ -62,7 +62,7 @@ public class CarDao {
     }
 
     public static void delete(Car car){
-        String sql="DELETE FROM car WHERE id=?";
+        String sql="DELETE FROM car WHERE car_id=?";
 
         try {
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
@@ -75,7 +75,7 @@ public class CarDao {
     }
 
     public static Car loadByID(int id){
-        String sql="SELECT * FROM car where id=?";
+        String sql="SELECT * FROM car where car_id=?";
 
         try {
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
@@ -89,7 +89,7 @@ public class CarDao {
                 newCar.setCarYear(rs.getInt(3));
                 newCar.setCarRegisterNumb(rs.getString(4));
                 newCar.setCarOwnerId(rs.getInt(5));
-                newCar.setCar_nextInsp(rs.getDate(6));
+                newCar.setCar_nextInsp(rs.getString(6));
 
                 return newCar;
             }
@@ -114,7 +114,7 @@ public class CarDao {
                 newCar.setCarYear(rs.getInt(3));
                 newCar.setCarRegisterNumb(rs.getString(4));
                 newCar.setCarOwnerId(rs.getInt(5));
-                newCar.setCar_nextInsp(rs.getDate(6));
+                newCar.setCar_nextInsp(rs.getString(6));
 
                 cars.add(newCar);
             }

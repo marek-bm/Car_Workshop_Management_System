@@ -8,7 +8,7 @@ public class Car {
     private  int carYear;
     private String carRegisterNumb;
     private int carOwnerId;
-    private Date car_nextInsp;
+    private String car_nextInsp;
 
 
     //getters and setters
@@ -42,18 +42,28 @@ public class Car {
     public void setCarOwnerId(int carOwnerId) {
         this.carOwnerId = carOwnerId;    }
 
-    public java.sql.Date getCar_nextInsp() {
-        return (java.sql.Date) car_nextInsp;    }
+    public String getCar_nextInsp() {
+        return  car_nextInsp;    }
 
-    public void setCar_nextInsp(Date car_nextInsp) {
+    public void setCar_nextInsp(String car_nextInsp) {
         this.car_nextInsp = car_nextInsp;    }
 
     //default constructor
     public Car() {}
 
     //full constructor
-    public Car(int carId, String carModel, int carYear, String carRegisterNumb, int carOwnerId, Date car_nextInsp) {
+    public Car(int carId, String carModel, int carYear, String carRegisterNumb, int carOwnerId, String car_nextInsp) {
         this.carId = carId;
+        this.carModel = carModel;
+        this.carYear = carYear;
+        this.carRegisterNumb = carRegisterNumb;
+        this.carOwnerId = carOwnerId;
+        this.car_nextInsp = car_nextInsp;
+    }
+
+    //constructor without ID
+
+    public Car(String carModel, int carYear, String carRegisterNumb, int carOwnerId, String car_nextInsp) {
         this.carModel = carModel;
         this.carYear = carYear;
         this.carRegisterNumb = carRegisterNumb;
