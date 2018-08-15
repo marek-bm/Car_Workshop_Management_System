@@ -74,12 +74,12 @@ public class CarDao {
         }
     }
 
-    public static Car load(Car car){
+    public static Car loadByID(int id){
         String sql="SELECT * FROM car where id=?";
 
         try {
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
-            pstm.setInt(1,car.getCarId());
+            pstm.setInt(1,id);
             ResultSet rs=pstm.executeQuery();
 
             if(rs.next()){
@@ -91,7 +91,7 @@ public class CarDao {
                 newCar.setCarOwnerId(rs.getInt(5));
                 newCar.setCar_nextInsp(rs.getDate(6));
 
-                return car;
+                return newCar;
             }
 
         } catch (SQLException e) {

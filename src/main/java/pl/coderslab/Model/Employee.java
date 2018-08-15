@@ -1,7 +1,7 @@
 package pl.coderslab.Model;
 
 public class Employee {
-    private int emp_id;
+    private int emp_id=0;
     private String emp_name;
     private String emp_lastName;
     private  int emp_phone;
@@ -48,6 +48,16 @@ public class Employee {
     //constructor full
     public Employee(int emp_id, String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_costPlnHr) {
         this.emp_id = emp_id;
+        this.emp_name = emp_name;
+        this.emp_lastName = emp_lastName;
+        this.emp_phone = emp_phone;
+        this.emp_note = emp_note;
+        this.emp_costPlnHr = emp_costPlnHr;
+    }
+
+    //constructor without ID
+    public Employee(String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_costPlnHr) {
+
         this.emp_name = emp_name;
         this.emp_lastName = emp_lastName;
         this.emp_phone = emp_phone;

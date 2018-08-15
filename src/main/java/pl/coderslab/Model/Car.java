@@ -43,7 +43,7 @@ public class Car {
         this.carOwnerId = carOwnerId;    }
 
     public java.sql.Date getCar_nextInsp() {
-        return car_nextInsp;    }
+        return (java.sql.Date) car_nextInsp;    }
 
     public void setCar_nextInsp(Date car_nextInsp) {
         this.car_nextInsp = car_nextInsp;    }
