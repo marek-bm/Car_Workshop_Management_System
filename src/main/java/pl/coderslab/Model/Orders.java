@@ -1,5 +1,7 @@
 package pl.coderslab.Model;
 
+import pl.coderslab.DAO.EmployeeDAO;
+
 public class Orders {
     private int orderId=0;
     private String startDate;
@@ -11,6 +13,8 @@ public class Orders {
     private int carId;
     private float employeeCost;
     private float partsCost;
+    private float hoursUsed;
+
 
     //getters and setters
     public int getOrderId() {
@@ -78,7 +82,9 @@ public class Orders {
     }
 
     public float getEmployeeCost() {
-        return employeeCost;
+        int employeeId=getEmployeeID();
+        Employee e=EmployeeDAO.loadById(employeeId);
+        return e.getEmp_costPlnHr();
     }
 
     public void setEmployeeCost(float employeeCost) {
@@ -93,6 +99,15 @@ public class Orders {
         this.partsCost = partsCost;
     }
 
+
+    public float getHoursUsed() {
+        return hoursUsed;
+    }
+
+    public void setHoursUsed(float hoursUsed) {
+        this.hoursUsed = hoursUsed;
+    }
+
     //constructor 1
     public Orders() {
     }
@@ -100,7 +115,7 @@ public class Orders {
     //cosnturctor 2
     public Orders(String startDate, String endDate, int employeeID,
                   String issueDesription, String fixScope, String status,
-                  int carId, float employeeCost, float partsCost) {
+                  int carId, float employeeCost, float partsCost, float hoursUsed) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.employeeID = employeeID;
@@ -110,6 +125,7 @@ public class Orders {
         this.carId = carId;
         this.employeeCost = employeeCost;
         this.partsCost = partsCost;
+        this.hoursUsed=hoursUsed;
     }
 
     //constructor3
@@ -126,5 +142,6 @@ public class Orders {
         this.carId = carId;
         this.employeeCost = employeeCost;
         this.partsCost = partsCost;
+        this.hoursUsed=hoursUsed;
     }
 }

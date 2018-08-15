@@ -22,13 +22,13 @@ public class OrdersDAO {
             updateDB(order);
         }
     }
-    
+
     private static void updateDB(Orders order) {
         try{
             String sql = "UPDATE orders SET " +
                     "order_id=?, order_start=?, order_finish=?, order_employeeID=?," +
                     "order_issueScope=?, order_fixScope=?, order_status=?, " +
-                    "order_carID=?, order_costEmpl=?, order_costParts=? where order_id = ?";
+                    "order_carID=?, order_costEmpl=?, order_costParts=? hours_used=? where order_id = ?";
 
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
             pstm.setInt(1, order.getOrderId());
@@ -41,6 +41,7 @@ public class OrdersDAO {
             pstm.setInt(8, order.getCarId());
             pstm.setDouble(9, order.getEmployeeCost());
             pstm.setDouble(10, order.getPartsCost());
+            pstm.setDouble(11, order.getHoursUsed());
             pstm.executeUpdate();
 
 
@@ -49,7 +50,7 @@ public class OrdersDAO {
 
     private static void addToDB(Orders order) {
         try {
-            String sql="INSERT into orders  VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql="INSERT into orders  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
 
             pstm.setString(1, null);
@@ -62,6 +63,7 @@ public class OrdersDAO {
             pstm.setInt(8, order.getCarId());
             pstm.setDouble(9, order.getEmployeeCost());
             pstm.setDouble(10, order.getPartsCost());
+            pstm.setDouble(11, order.getHoursUsed());
             pstm.executeUpdate();
 
             ResultSet rs = pstm.getGeneratedKeys();
@@ -137,6 +139,7 @@ public class OrdersDAO {
         order.setEmployeeID(rs.getInt(8));
         order.setEmployeeCost(rs.getFloat(9));
         order.setPartsCost(rs.getFloat(10));
+        order.setHoursUsed(rs.getFloat(11));
 
         return order;
     }

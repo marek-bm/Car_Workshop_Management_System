@@ -6,7 +6,7 @@ public class Employee {
     private String emp_lastName;
     private  int emp_phone;
     private String emp_note;
-    private Float emp_costPlnHr;
+    private Float emp_hourlyRate;
 
     //getters and setters
     public int getEmp_id() { return emp_id; }
@@ -35,10 +35,10 @@ public class Employee {
         this.emp_note = emp_note; }
 
     public Float getEmp_costPlnHr() {
-        return emp_costPlnHr; }
+        return emp_hourlyRate; }
 
     public void setEmp_costPlnHr(Float emp_costPlnHr) {
-        this.emp_costPlnHr = emp_costPlnHr; }
+        this.emp_hourlyRate = emp_costPlnHr; }
 
 
     //constructor default
@@ -52,7 +52,7 @@ public class Employee {
         this.emp_lastName = emp_lastName;
         this.emp_phone = emp_phone;
         this.emp_note = emp_note;
-        this.emp_costPlnHr = emp_costPlnHr;
+        this.emp_hourlyRate = emp_costPlnHr;
     }
 
     //constructor without ID
@@ -62,11 +62,11 @@ public class Employee {
         this.emp_lastName = emp_lastName;
         this.emp_phone = emp_phone;
         this.emp_note = emp_note;
-        this.emp_costPlnHr = emp_costPlnHr;
+        this.emp_hourlyRate = emp_costPlnHr;
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "emp_id=" + emp_id + ", emp_name='" + emp_name + '\'' + ", emp_lastName='" + emp_lastName + '\'' + ", emp_phone=" + emp_phone + ", emp_note='" + emp_note + '\'' + ", emp_costPlnHr=" + emp_costPlnHr + '}';
+        return "Employee{" + "emp_id=" + emp_id + ", emp_name='" + emp_name + '\'' + ", emp_lastName='" + emp_lastName + '\'' + ", emp_phone=" + emp_phone + ", emp_note='" + emp_note + '\'' + ", emp_costPlnHr=" + emp_hourlyRate + '}';
     }
 }
