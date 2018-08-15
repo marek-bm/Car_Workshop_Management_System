@@ -34,11 +34,11 @@ public class CustomerDAO {
 
     private static void updateDB(Customer customer) {
         try{
-            String sql = "UPDATE customer SET cust_name=?, cust_lastName=?, cust_birthday=?, cust_phone=?) where  cust_id = ?";
+            String sql = "UPDATE customer SET cust_name=?, cust_lastName=?, cust_birthday=?, cust_phone=? where  cust_id = ?";
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
             pstm.setString(1, customer.getCustomerName());
             pstm.setString(2, customer.getCustomerLastName());
-            pstm.setDate(3,customer.getCustomerBirthday() );
+            pstm.setString(3,customer.getCustomerBirthday() );
             pstm.setInt(4, customer.getCustomerPhone());
             pstm.setInt(5,customer.getCustomerId());
             pstm.executeUpdate();
@@ -54,7 +54,7 @@ public class CustomerDAO {
 
             pstm.setString(1, customer.getCustomerName());
             pstm.setString(2, customer.getCustomerLastName());
-            pstm.setDate(3,customer.getCustomerBirthday() );
+            pstm.setString(3,customer.getCustomerBirthday() );
             pstm.setInt(4, customer.getCustomerPhone());
             pstm.executeUpdate();
 
@@ -71,10 +71,10 @@ public class CustomerDAO {
 
     public static void delete(int id){
         String sql="DELETE FROM customer WHERE cust_id=?";
-        deleteCustomer(id, sql);
+        deleteById(id, sql);
     }
 
-    static void deleteCustomer(int id, String sql) {
+    static void deleteById(int id, String sql) {
         try {
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
             pstm.setInt(1, id);
@@ -131,7 +131,7 @@ public class CustomerDAO {
         customer.setCustomerId(rs.getInt(1));
         customer.setCustomerName(rs.getString(2));
         customer.setCustomerLastName(rs.getString(3));
-        customer.setCustomerBirthday(rs.getDate(4));
+        customer.setCustomerBirthday(rs.getString(4));
         customer.setCustomerPhone(rs.getInt(5));
 
         return customer;

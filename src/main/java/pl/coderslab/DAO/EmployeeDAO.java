@@ -66,7 +66,7 @@ public class EmployeeDAO{
     public static void delete(int id){
         String sql="DELETE FROM employee WHERE emp_id=?";
 
-        CustomerDAO.del(id, sql);
+        CustomerDAO.deleteById(id, sql);
     }
 
     public static Employee loadById(int id){

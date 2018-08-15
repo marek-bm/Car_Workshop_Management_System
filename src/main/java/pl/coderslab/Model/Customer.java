@@ -6,7 +6,7 @@ public class Customer {
     private int customerId=0;
     private String customerName;
     private String customerLastName;
-    private Date customerBirthday;
+    private String customerBirthday;
     private  int customerPhone;
 
 
@@ -29,10 +29,10 @@ public class Customer {
     public void setCustomerLastName(String customerLastName) {
         this.customerLastName = customerLastName;    }
 
-    public java.sql.Date getCustomerBirthday() {
-        return (java.sql.Date) customerBirthday;    }
+    public String getCustomerBirthday() {
+        return  customerBirthday;    }
 
-    public void setCustomerBirthday(Date customerBirthday) {
+    public void setCustomerBirthday(String customerBirthday) {
         this.customerBirthday = customerBirthday;    }
 
     public int getCustomerPhone() {
@@ -47,13 +47,24 @@ public class Customer {
     }
 
     //consturctor full
-    public Customer(int customerId, String customerName, String customerLastName, Date customerBirthday, int customerPhone) {
+    public Customer(int customerId, String customerName, String customerLastName, String customerBirthday, int customerPhone) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerLastName = customerLastName;
         this.customerBirthday = customerBirthday;
         this.customerPhone = customerPhone;
     }
+
+
+    //consturctor without id
+    public Customer( String customerName, String customerLastName, String customerBirthday, int customerPhone) {
+
+        this.customerName = customerName;
+        this.customerLastName = customerLastName;
+        this.customerBirthday = customerBirthday;
+        this.customerPhone = customerPhone;
+    }
+
 
 
     @Override
