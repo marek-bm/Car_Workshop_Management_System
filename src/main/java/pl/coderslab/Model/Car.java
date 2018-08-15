@@ -1,12 +1,14 @@
 package pl.coderslab.Model;
 
+import java.util.Date;
+
 public class Car {
     private int carId;
     private String carModel;
     private  int carYear;
     private String carRegisterNumb;
-    private String carOwnerId;
-    private String car_nextInsp;
+    private int carOwnerId;
+    private Date car_nextInsp;
 
 
     //getters and setters
@@ -34,23 +36,23 @@ public class Car {
     public void setCarRegisterNumb(String carRegisterNumb) {
         this.carRegisterNumb = carRegisterNumb;    }
 
-    public String getCarOwnerId() {
+    public int getCarOwnerId() {
         return carOwnerId;    }
 
-    public void setCarOwnerId(String carOwnerId) {
+    public void setCarOwnerId(int carOwnerId) {
         this.carOwnerId = carOwnerId;    }
 
-    public String getCar_nextInsp() {
+    public java.sql.Date getCar_nextInsp() {
         return car_nextInsp;    }
 
-    public void setCar_nextInsp(String car_nextInsp) {
+    public void setCar_nextInsp(Date car_nextInsp) {
         this.car_nextInsp = car_nextInsp;    }
 
     //default constructor
     public Car() {}
 
     //full constructor
-    public Car(int carId, String carModel, int carYear, String carRegisterNumb, String carOwnerId, String car_nextInsp) {
+    public Car(int carId, String carModel, int carYear, String carRegisterNumb, int carOwnerId, Date car_nextInsp) {
         this.carId = carId;
         this.carModel = carModel;
         this.carYear = carYear;
