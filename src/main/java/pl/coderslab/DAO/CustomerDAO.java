@@ -1,6 +1,7 @@
 package pl.coderslab.DAO;
 
 import pl.coderslab.Connection.DbManager;
+import pl.coderslab.Model.Car;
 import pl.coderslab.Model.Customer;
 import pl.coderslab.Model.Employee;
 
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CustomerDAO {
 
@@ -135,6 +137,28 @@ public class CustomerDAO {
         customer.setCustomerPhone(rs.getInt(5));
 
         return customer;
+    }
+
+    public static List<Car> loadUserCars(int ownerId){
+        String sql="SELECT * FROM car WHERE car_ownerId=?";
+        try {
+            List<Car> cars=new ArrayList<>();
+            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
+            pstm.setInt(1, ownerId);
+            ResultSet rs=pstm.executeQuery();
+
+            while (rs.next()){
+                Car car=CarDao.getCarFromResultSet(rs);
+                cars.add(car);
+            }
+            return cars;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+
     }
 
 }

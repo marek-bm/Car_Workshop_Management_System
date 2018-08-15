@@ -83,15 +83,8 @@ public class CarDao {
             ResultSet rs=pstm.executeQuery();
 
             if(rs.next()){
-                Car newCar=new Car();
-                newCar.setCarId(rs.getInt(1));
-                newCar.setCarModel(rs.getString(2));
-                newCar.setCarYear(rs.getInt(3));
-                newCar.setCarRegisterNumb(rs.getString(4));
-                newCar.setCarOwnerId(rs.getInt(5));
-                newCar.setCar_nextInsp(rs.getString(6));
+                Car newCar=getCarFromResultSet(rs);
 
-                return newCar;
             }
 
         } catch (SQLException e) {
@@ -108,14 +101,7 @@ public class CarDao {
             ResultSet rs=pstm.executeQuery();
 
             while (rs.next()){
-                Car newCar=new Car();
-                newCar.setCarId(rs.getInt(1));
-                newCar.setCarModel(rs.getString(2));
-                newCar.setCarYear(rs.getInt(3));
-                newCar.setCarRegisterNumb(rs.getString(4));
-                newCar.setCarOwnerId(rs.getInt(5));
-                newCar.setCar_nextInsp(rs.getString(6));
-
+                Car newCar=getCarFromResultSet(rs);
                 cars.add(newCar);
             }
             return cars;
@@ -125,6 +111,18 @@ public class CarDao {
         }
         return null;
     }
+
+    public static Car getCarFromResultSet(ResultSet rs) throws SQLException {
+        Car newCar=new Car();
+        newCar.setCarId(rs.getInt(1));
+        newCar.setCarModel(rs.getString(2));
+        newCar.setCarYear(rs.getInt(3));
+        newCar.setCarRegisterNumb(rs.getString(4));
+        newCar.setCarOwnerId(rs.getInt(5));
+        newCar.setCar_nextInsp(rs.getString(6));
+        return newCar;
+    }
+
 
 }
 
