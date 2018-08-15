@@ -66,14 +66,7 @@ public class EmployeeDAO{
     public static void delete(int id){
         String sql="DELETE FROM employee WHERE emp_id=?";
 
-        try {
-            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
-            pstm.setInt(1, id);
-            pstm.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        CustomerDAO.del(id, sql);
     }
 
     public static Employee loadById(int id){

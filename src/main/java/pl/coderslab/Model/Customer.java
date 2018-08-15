@@ -3,7 +3,7 @@ package pl.coderslab.Model;
 import java.util.Date;
 
 public class Customer {
-    private int customerId;
+    private int customerId=0;
     private String customerName;
     private String customerLastName;
     private Date customerBirthday;
@@ -29,8 +29,8 @@ public class Customer {
     public void setCustomerLastName(String customerLastName) {
         this.customerLastName = customerLastName;    }
 
-    public Date getCustomerBirthday() {
-        return customerBirthday;    }
+    public java.sql.Date getCustomerBirthday() {
+        return (java.sql.Date) customerBirthday;    }
 
     public void setCustomerBirthday(Date customerBirthday) {
         this.customerBirthday = customerBirthday;    }
@@ -54,6 +54,7 @@ public class Customer {
         this.customerBirthday = customerBirthday;
         this.customerPhone = customerPhone;
     }
+
 
     @Override
     public String toString() {
