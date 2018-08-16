@@ -34,35 +34,36 @@ public class Employee {
     public void setEmp_note(String emp_note) {
         this.emp_note = emp_note; }
 
-    public Float getEmp_costPlnHr() {
-        return emp_hourlyRate; }
+    public Float getEmp_hourlyRate() {
+        return emp_hourlyRate;
+    }
 
-    public void setEmp_costPlnHr(Float emp_costPlnHr) {
-        this.emp_hourlyRate = emp_costPlnHr; }
-
+    public void setEmp_hourlyRate(Float emp_hourlyRate) {
+        this.emp_hourlyRate = emp_hourlyRate;
+    }
 
     //constructor default
     public Employee() {
     }
 
     //constructor full
-    public Employee(int emp_id, String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_costPlnHr) {
+    public Employee(int emp_id, String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_hourlyRate) {
         this.emp_id = emp_id;
         this.emp_name = emp_name;
         this.emp_lastName = emp_lastName;
         this.emp_phone = emp_phone;
         this.emp_note = emp_note;
-        this.emp_hourlyRate = emp_costPlnHr;
+        this.emp_hourlyRate = emp_hourlyRate;
     }
 
     //constructor without ID
-    public Employee(String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_costPlnHr) {
+    public Employee(String emp_name, String emp_lastName, int emp_phone, String emp_note, Float emp_hourlyRate) {
 
         this.emp_name = emp_name;
         this.emp_lastName = emp_lastName;
         this.emp_phone = emp_phone;
         this.emp_note = emp_note;
-        this.emp_hourlyRate = emp_costPlnHr;
+        this.emp_hourlyRate = emp_hourlyRate;
     }
 
     @Override

@@ -2,12 +2,16 @@ package pl.coderslab.DAO;
 
 import pl.coderslab.Connection.DbManager;
 import pl.coderslab.Model.Car;
+import pl.coderslab.Model.Customer;
+import pl.coderslab.Model.Employee;
 import pl.coderslab.Model.Orders;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersDAO {
 
@@ -28,7 +32,7 @@ public class OrdersDAO {
             String sql = "UPDATE orders SET " +
                     "order_id=?, order_start=?, order_finish=?, order_employeeID=?," +
                     "order_issueScope=?, order_fixScope=?, order_status=?, " +
-                    "order_carID=?, order_costEmpl=?, order_costParts=? hours_used=? where order_id = ?";
+                    "order_carID=?, order_costEmpl=?, order_costParts=?, hours_used=? where order_id = ?";
 
             PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
             pstm.setInt(1, order.getOrderId());
@@ -42,6 +46,7 @@ public class OrdersDAO {
             pstm.setDouble(9, order.getEmployeeCost());
             pstm.setDouble(10, order.getPartsCost());
             pstm.setDouble(11, order.getHoursUsed());
+            pstm.setInt(12, order.getOrderId());
             pstm.executeUpdate();
 
 
@@ -51,7 +56,8 @@ public class OrdersDAO {
     private static void addToDB(Orders order) {
         try {
             String sql="INSERT into orders  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
+            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
 
             pstm.setString(1, null);
             pstm.setString(2, order.getStartDate());
@@ -68,7 +74,7 @@ public class OrdersDAO {
 
             ResultSet rs = pstm.getGeneratedKeys();
             if (rs.next()) {
-                order.setCarId(rs.getInt(1));
+                order.setOrderId(rs.getInt(1));
             }
         }
         catch (SQLException e) {
@@ -89,7 +95,7 @@ public class OrdersDAO {
         }
     }
 
-    public static Car loadByID(int id){
+    public static Orders loadByID(int id){
         String sql="SELECT * FROM orders where order_id=?";
 
         try {
@@ -99,6 +105,7 @@ public class OrdersDAO {
 
             if(rs.next()){
                 Orders order=getFromResultSet(rs);
+                return order;
 
             }
 
@@ -136,12 +143,58 @@ public class OrdersDAO {
         order.setIssueDesription(rs.getString(5));
         order.setFixScope(rs.getString(6));
         order.setStatus(rs.getString(7));
-        order.setEmployeeID(rs.getInt(8));
+        order.setCarId(rs.getInt(8));
         order.setEmployeeCost(rs.getFloat(9));
         order.setPartsCost(rs.getFloat(10));
         order.setHoursUsed(rs.getFloat(11));
 
         return order;
+    }
+
+
+    public static Object[] getOrderSummary(Orders order){
+        String sql="SELECT * FROM orders WHERE order_carID=?";
+
+
+//        String sql="SELECT * FROM car \n" +
+//                "JOIN orders ON orders.order_carID=car.car_id \n" +
+//                "JOIN employee ON employee.emp_id=orders.order_employeeID WHERE car.car_id=?";
+        try {
+
+            //list containing [0]order, [1]customer, [2]car, [3]employee
+            Object[] itmes=new Object[4];
+
+//            List<Object> summary=new ArrayList<>();
+            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
+            pstm.setInt(1,order.getCarId());
+            ResultSet rs=pstm.executeQuery();
+
+            Employee employee=new Employee();
+            Car car=new Car();
+            Customer customer=new Customer();
+
+            itmes[0]=order;
+
+
+            if(rs.next()){
+
+                car=CarDao.loadByID(rs.getInt(8));
+                customer=CustomerDAO.loadById(car.getCarOwnerId());
+                employee=EmployeeDAO.loadById(rs.getInt("order_employeeID"));
+
+                itmes[1]=customer;
+                itmes[2]=car;
+                itmes[3]=employee;
+
+
+            }
+            return itmes;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 }

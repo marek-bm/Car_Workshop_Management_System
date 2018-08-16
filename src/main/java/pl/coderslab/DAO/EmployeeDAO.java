@@ -32,7 +32,7 @@ public class EmployeeDAO{
             pstm.setString(2, employee.getEmp_lastName());
             pstm.setInt(3, employee.getEmp_phone());
             pstm.setString(4, employee.getEmp_note());
-            pstm.setDouble(5, employee.getEmp_costPlnHr());
+            pstm.setDouble(5, employee.getEmp_hourlyRate());
             pstm.setInt(6,employee.getEmp_id());
             pstm.executeUpdate();
 
@@ -48,7 +48,7 @@ public class EmployeeDAO{
             pstm.setString(2, employee.getEmp_lastName());
             pstm.setInt(3, employee.getEmp_phone());
             pstm.setString(4, employee.getEmp_note());
-            pstm.setDouble(5, employee.getEmp_costPlnHr());
+            pstm.setDouble(5, employee.getEmp_hourlyRate());
 
             pstm.executeUpdate();
 
@@ -117,7 +117,7 @@ public class EmployeeDAO{
         employee.setEmp_lastName(rs.getString(3));
         employee.setEmp_phone(rs.getInt(4));
         employee.setEmp_note(rs.getString(5));
-        employee.setEmp_costPlnHr(rs.getFloat(6));
+        employee.setEmp_hourlyRate(rs.getFloat(6));
         return employee;
     }
 

@@ -84,6 +84,7 @@ public class CarDao {
 
             if(rs.next()){
                 Car newCar=getCarFromResultSet(rs);
+                return  newCar;
 
             }
 

@@ -82,9 +82,9 @@ public class Orders {
     }
 
     public float getEmployeeCost() {
-        int employeeId=getEmployeeID();
+        int employeeId=this.employeeID;
         Employee e=EmployeeDAO.loadById(employeeId);
-        return e.getEmp_costPlnHr();
+        return e.getEmp_hourlyRate();
     }
 
     public void setEmployeeCost(float employeeCost) {
@@ -131,7 +131,7 @@ public class Orders {
     //constructor3
     public Orders(int orderId, String startDate, String endDate,
                   int employeeID, String issueDesription, String fixScope,
-                  String status, int carId, float employeeCost, float partsCost) {
+                  String status, int carId, float employeeCost, float partsCost, float hoursUsed) {
         this.orderId = orderId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -143,5 +143,10 @@ public class Orders {
         this.employeeCost = employeeCost;
         this.partsCost = partsCost;
         this.hoursUsed=hoursUsed;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" + "orderId=" + orderId + ", startDate='" + startDate + '\'' + ", endDate='" + endDate + '\'' + ", employeeID=" + employeeID + ", issueDesription='" + issueDesription + '\'' + ", fixScope='" + fixScope + '\'' + ", status='" + status + '\'' + ", carId=" + carId + ", employeeCost=" + employeeCost + ", partsCost=" + partsCost + ", hoursUsed=" + hoursUsed + '}';
     }
 }
