@@ -186,7 +186,6 @@ public class OrdersDAO {
                 itmes[2]=car;
                 itmes[3]=employee;
 
-
             }
             return itmes;
 
@@ -196,6 +195,65 @@ public class OrdersDAO {
         return null;
 
     }
+
+
+    public static ArrayList<Orders> loadByEmployee(int employeeID, String startDate, String finishDate){
+        String sql="SELECT * FROM orders WHERE orders.order_employeeID=? AND order_finish>? AND order_finish<?";
+        try {
+            ArrayList<Orders> orders=new ArrayList<>();
+            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
+            pstm.setInt(1,employeeID);
+            pstm.setString(2, startDate);
+            pstm.setString(3, finishDate);
+            ResultSet rs=pstm.executeQuery();
+
+            while (rs.next()){
+                Orders o=getFromResultSet(rs);
+                orders.add(o);
+            }
+            return orders;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static ArrayList<Orders> loadByDate(String startingDate, String finishDate){
+        String sql="SELECT * FROM orders WHERE order_finish>? AND order_finish<?";
+        try {
+            ArrayList<Orders> orders=new ArrayList<>();
+            PreparedStatement pstm=DbManager.getInstance().getConnection().prepareStatement(sql);
+            pstm.setString(1, startingDate);
+            pstm.setString(2, finishDate);
+            ResultSet rs=pstm.executeQuery();
+
+            while (rs.next()){
+                Orders o=getFromResultSet(rs);
+                orders.add(o);
+            }
+            return orders;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    public static Float getOrdersValue(List<Orders> orders){
+        float totalValue=0;
+        for(int i=0; i<orders.size(); i++){
+            Orders o=orders.get(i);
+            Float value=o.getEmployeeCost()*o.getHoursUsed()+o.getPartsCost();
+            totalValue+=value;
+        }
+        return totalValue;
+    }
+
+
 
 }
 

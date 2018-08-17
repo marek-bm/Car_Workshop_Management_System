@@ -23,6 +23,7 @@ public class CustomerCars extends HttpServlet {
         if(id>0){
             List<Car> cars=CustomerDAO.loadUserCars(id);
             request.setAttribute("cars", cars);
+            request.setAttribute("id", id);
             getServletContext().getRequestDispatcher("/META-INF/views/customer/customerCars.jsp").forward(request,response);
         }
 
